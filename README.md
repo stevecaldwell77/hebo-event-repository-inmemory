@@ -35,13 +35,15 @@ yarn add hebo-event-repository-inmemory
 
 ## Usage
 
+This repository is meant to be used in tests, not in production code, since it
+only stores things to memory.
+
 ```js
 const HeboEventRepositoryInmemory = require('hebo-event-repository-inmemory');
-
-const heboEventRepositoryInmemory = new HeboEventRepositoryInmemory();
-
-console.log(heboEventRepositoryInmemory.renderName());
-// script
+const aggregateNames = ['library', 'book', 'author'];
+const eventRepository = new HeboEventRepositoryInmemory({
+    aggregates: aggregateNames
+});
 ```
 
 
