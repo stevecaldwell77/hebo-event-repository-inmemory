@@ -1,5 +1,6 @@
 const assert = require('assert');
 const curry = require('lodash/curry');
+const isArray = require('lodash/isArray');
 const autoBind = require('auto-bind');
 const uniq = require('lodash/uniq');
 const { validateEvent } = require('hebo/validators');
@@ -18,7 +19,12 @@ const eventCanBeAppended = (prevEvents, event) => {
 };
 
 class EventRepositoryInmemory {
-    constructor({ aggregates = [] } = {}) {
+    constructor({ aggregates } = {}) {
+        assert(aggregates, 'EventRepositoryInmemory: aggregates required');
+        assert(
+            isArray(aggregates),
+            'EventRepositoryInmemory: aggregates must be an array',
+        );
         this.aggregates = uniq(aggregates).reduce(
             (accum, aggregate) => ({ ...accum, [aggregate]: {} }),
             {},
