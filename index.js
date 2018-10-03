@@ -20,7 +20,7 @@ const eventCanBeAppended = (prevEvents, event) => {
 class EventRepositoryInmemory {
     constructor({ aggregates = [] } = {}) {
         this.aggregates = uniq(aggregates).reduce(
-            (accum, aggregate) => ({ [aggregate]: {} }),
+            (accum, aggregate) => ({ ...accum, [aggregate]: {} }),
             {},
         );
         autoBind(this);
