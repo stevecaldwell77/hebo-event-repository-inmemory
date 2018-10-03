@@ -41,6 +41,7 @@
     "prettier": "latest",
     "remark-cli": "latest",
     "remark-preset-github": "latest",
+    "shortid": "^2.2.13",
     "xo": "latest"
   },
   "engines": {
