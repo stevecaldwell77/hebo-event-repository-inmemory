@@ -19,7 +19,11 @@
   "contributors": [
     "Steve Caldwell <scaldwell@gmail.com>"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "auto-bind": "^1.2.1",
+    "hebo": "^0.2.1",
+    "lodash": "^4.17.11"
+  },
   "devDependencies": {
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
