@@ -1,8 +1,15 @@
 language: node_js
 node_js:
-  - '8'
-  - '10'
-script:
-  npm run test-coverage
-after_success:
-  npm run coverage
+- '8'
+- '10'
+script: npm run test-coverage
+after_success: npm run coverage
+deploy:
+  provider: npm
+  email: scaldwell@gmail.com
+  api_key:
+    secure: Y/f7DKaFUSPNgu1b4W1SpHqwX+NNf7AxvqMSCkaN4u7VDXyfiaj+/Zw9/iZVzvCBFhJuEXbUS1xXCrn30QsjL0CrvVbl7UN+CO6zHcKcXIzxqJaC8EJq+Va5cTsomQp2UtZM03j6jxd7SblffVkJFJesRPWEDETOTela0JKV6DvLbMcf1WsZJF3TZcbgdMFj5C4Ks+OFZeJpbf36UvW5bIg/xKuUHbsNXFR4mmyrtC5XgVJIgVzt33qlN/JpAYqadQ9sJJKZzQP4I0ffz44mcEQAtCQWnXAynXsER+alg152r8G83yjabn9j37s0w2pdFQ2VUzS1wp18cq5+kWmlQoXdXUwiJZXtN2XYrfPeNTiFob7H+cLmqvvuYoM6f4mVJ89+hPl41R/m3Dh0sDMel4u33yXlTc0S6agIcm1sQh0BoMQxJoJvbJytcMYpf8jeEeCPKydz3k+7aTcscW1LERPJ6Um+4PyM28tsxORqB5POBMVN3wgQNq5ie6BP3RhslwtBZ3LDPpaE3hD0Mg1Or/bcPjPozrxO866wZYRwVdzyD+1fwjq96aSOHIczKH8Ik3fOF1sp7sQuDvGhKDGxSinhvr96V8v4tVZgxWoiTxGnheVB4fgvqwt+OuQfTaLISnSFeSucKBW90kwDFeIOh1pfQh/CDMZwxRK3ybHFHM0=
+  on:
+    tags: true
+    repo: stevecaldwell77/hebo-event-repository-inmemory
+    node: '8'
