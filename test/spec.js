@@ -1,6 +1,7 @@
 const test = require('ava');
 const shortid = require('shortid');
 const { InvalidEventError } = require('hebo/errors');
+const { validateEventRepository } = require('hebo/validators');
 const EventRepositoryInmemory = require('..');
 
 const makeRepo = () => new EventRepositoryInmemory({ aggregates: ['book'] });
@@ -27,6 +28,12 @@ const makeSetPublisherEvent = ({ version }) => ({
     metadata: { userId: 1234 },
     payload: { publisherId: shortid.generate() },
     version,
+});
+
+test('passes validator', t => {
+    const repo = makeRepo();
+    const { error } = validateEventRepository(repo);
+    t.is(error, null, 'no error generaged by validation');
 });
 
 test('writeEvent() - valid event is written', async t => {
