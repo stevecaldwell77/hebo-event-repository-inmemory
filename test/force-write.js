@@ -10,7 +10,7 @@ test('forceWriteEvent() - invalid event can be stored', async t => {
         eventId: shortid.generate(),
         metadata: {},
         payload: {},
-        version: 1,
+        sequenceNumber: 1,
     };
 
     // event missing type

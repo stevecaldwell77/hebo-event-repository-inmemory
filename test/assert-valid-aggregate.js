@@ -13,7 +13,7 @@ test('writeEvent() - aggregate must be defined in constructor', async t => {
         type: 'NAME_SET',
         metadata: { userId: 1234 },
         payload: { name: 'Johnson' },
-        version: 1,
+        sequenceNumber: 1,
     };
 
     await t.notThrows(

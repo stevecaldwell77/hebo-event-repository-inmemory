@@ -5,17 +5,17 @@ const autoBind = require('auto-bind');
 const uniq = require('lodash/uniq');
 const { validateEvent } = require('hebo-validation');
 
-const versionFilter = curry(
-    (greaterThan, event) => event.version > greaterThan,
+const sequenceNumberFilter = curry(
+    (greaterThan, event) => event.sequenceNumber > greaterThan,
 );
 
 const last = arr => arr.slice(-1)[0];
 
 const eventCanBeAppended = (prevEvents, event) => {
     const lastEvent = last(prevEvents);
-    const lastVersion = lastEvent ? lastEvent.version : 0;
-    const newVersion = event.version;
-    return newVersion > lastVersion;
+    const lastsequenceNumber = lastEvent ? lastEvent.sequenceNumber : 0;
+    const newsequenceNumber = event.sequenceNumber;
+    return newsequenceNumber > lastsequenceNumber;
 };
 
 class EventRepositoryInmemory {
@@ -40,10 +40,12 @@ class EventRepositoryInmemory {
     }
 
     // eslint-disable-next-line require-await
-    async getEvents(aggregateName, aggregateId, greaterThanVersion = 0) {
+    async getEvents(aggregateName, aggregateId, greaterThanSequenceNumber = 0) {
         this.assertValidAggregate('getEvents', aggregateName);
         const allEvents = this.aggregates[aggregateName][aggregateId] || [];
-        return allEvents.filter(versionFilter(greaterThanVersion));
+        return allEvents.filter(
+            sequenceNumberFilter(greaterThanSequenceNumber),
+        );
     }
 
     async appendEvent(aggregateName, aggregateId, event) {
