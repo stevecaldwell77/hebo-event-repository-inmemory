@@ -1,7 +1,9 @@
 const test = require('ava');
 const shortid = require('shortid');
-const { InvalidEventError } = require('hebo/errors');
-const { validateEventRepository } = require('hebo/validators');
+const {
+    validateEventRepository,
+    InvalidEventError,
+} = require('hebo-validation');
 const EventRepositoryInmemory = require('..');
 
 const makeRepo = () => new EventRepositoryInmemory({ aggregates: ['book'] });

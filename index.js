@@ -3,7 +3,7 @@ const curry = require('lodash/curry');
 const isArray = require('lodash/isArray');
 const autoBind = require('auto-bind');
 const uniq = require('lodash/uniq');
-const { validateEvent } = require('hebo/validators');
+const { validateEvent } = require('hebo-validation');
 
 const versionFilter = curry(
     (greaterThan, event) => event.version > greaterThan,
