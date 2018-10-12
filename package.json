@@ -90,7 +90,7 @@
     ]
   },
   "peerDependencies": {
-    "hebo": "^0.3.3"
+    "hebo": "^1.0.0"
   },
   "prettier": {
     "singleQuote": true,
