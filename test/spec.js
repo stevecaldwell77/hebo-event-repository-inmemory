@@ -8,7 +8,9 @@ const EventRepositoryInmemory = require('..');
 
 const makeRepo = () => new EventRepositoryInmemory({ aggregates: ['book'] });
 
-const makeSetAuthorEvent = ({ sequenceNumber }) => ({
+const makeSetAuthorEvent = ({ bookId, sequenceNumber }) => ({
+    aggregateName: 'book',
+    aggregateId: bookId,
     eventId: shortid.generate(),
     type: 'AUTHOR_SET',
     metadata: { userId: 1234 },
@@ -16,7 +18,9 @@ const makeSetAuthorEvent = ({ sequenceNumber }) => ({
     sequenceNumber,
 });
 
-const makeSetTitleEvent = ({ sequenceNumber }) => ({
+const makeSetTitleEvent = ({ bookId, sequenceNumber }) => ({
+    aggregateName: 'book',
+    aggregateId: bookId,
     eventId: shortid.generate(),
     type: 'TITLE_SET',
     metadata: { userId: 1234 },
@@ -24,7 +28,9 @@ const makeSetTitleEvent = ({ sequenceNumber }) => ({
     sequenceNumber,
 });
 
-const makeSetPublisherEvent = ({ sequenceNumber }) => ({
+const makeSetPublisherEvent = ({ bookId, sequenceNumber }) => ({
+    aggregateName: 'book',
+    aggregateId: bookId,
     eventId: shortid.generate(),
     type: 'PUBLISHER_SET',
     metadata: { userId: 1234 },
@@ -42,13 +48,13 @@ test('writeEvent() - valid event is written', async t => {
     const repo = makeRepo();
     const bookId = shortid.generate();
 
-    const event1 = makeSetAuthorEvent({ sequenceNumber: 1 });
-    const event2 = makeSetTitleEvent({ sequenceNumber: 2 });
+    const event1 = makeSetAuthorEvent({ bookId, sequenceNumber: 1 });
+    const event2 = makeSetTitleEvent({ bookId, sequenceNumber: 2 });
 
-    const result1 = await repo.writeEvent('book', bookId, event1);
+    const result1 = await repo.writeEvent(event1);
     t.true(result1, 'writeEvent() returns true with valid event');
 
-    const result2 = await repo.writeEvent('book', bookId, event2);
+    const result2 = await repo.writeEvent(event2);
     t.true(result2, 'writeEvent() returns true with second valid event');
 
     t.deepEqual(
@@ -64,7 +70,9 @@ test('writeEvent() - invalid event throws an error', async t => {
 
     // event missing type
     await t.throws(
-        repo.writeEvent('book', bookId, {
+        repo.writeEvent({
+            aggregateName: 'book',
+            aggregateId: bookId,
             eventId: shortid.generate(),
             metadata: {},
             payload: {},
@@ -85,12 +93,12 @@ test('writeEvent() - stale sequenceNumber returns false', async t => {
     const repo = makeRepo();
     const bookId = shortid.generate();
 
-    const event1 = makeSetAuthorEvent({ sequenceNumber: 1 });
-    const event2 = makeSetTitleEvent({ sequenceNumber: 1 });
+    const event1 = makeSetAuthorEvent({ bookId, sequenceNumber: 1 });
+    const event2 = makeSetTitleEvent({ bookId, sequenceNumber: 1 });
 
-    await repo.writeEvent('book', bookId, event1);
+    await repo.writeEvent(event1);
 
-    const result2 = await repo.writeEvent('book', bookId, event2);
+    const result2 = await repo.writeEvent(event2);
     t.false(
         result2,
         'writeEvent() returns false for event with stale sequenceNumber',
@@ -113,13 +121,13 @@ test('getEvents() - no minimum sequenceNumber', async t => {
         'getEvents() can be called on empty store',
     );
 
-    const event1 = makeSetAuthorEvent({ sequenceNumber: 1 });
-    const event2 = makeSetTitleEvent({ sequenceNumber: 2 });
-    const event3 = makeSetPublisherEvent({ sequenceNumber: 3 });
+    const event1 = makeSetAuthorEvent({ bookId, sequenceNumber: 1 });
+    const event2 = makeSetTitleEvent({ bookId, sequenceNumber: 2 });
+    const event3 = makeSetPublisherEvent({ bookId, sequenceNumber: 3 });
 
-    await repo.writeEvent('book', bookId, event1);
-    await repo.writeEvent('book', bookId, event2);
-    await repo.writeEvent('book', bookId, event3);
+    await repo.writeEvent(event1);
+    await repo.writeEvent(event2);
+    await repo.writeEvent(event3);
 
     t.deepEqual(
         await repo.getEvents('book', bookId),
@@ -132,13 +140,13 @@ test('getEvents() - minimum sequenceNumber', async t => {
     const repo = makeRepo();
     const bookId = shortid.generate();
 
-    const event1 = makeSetAuthorEvent({ sequenceNumber: 1 });
-    const event2 = makeSetTitleEvent({ sequenceNumber: 2 });
-    const event3 = makeSetPublisherEvent({ sequenceNumber: 3 });
+    const event1 = makeSetAuthorEvent({ bookId, sequenceNumber: 1 });
+    const event2 = makeSetTitleEvent({ bookId, sequenceNumber: 2 });
+    const event3 = makeSetPublisherEvent({ bookId, sequenceNumber: 3 });
 
-    await repo.writeEvent('book', bookId, event1);
-    await repo.writeEvent('book', bookId, event2);
-    await repo.writeEvent('book', bookId, event3);
+    await repo.writeEvent(event1);
+    await repo.writeEvent(event2);
+    await repo.writeEvent(event3);
 
     t.deepEqual(
         await repo.getEvents('book', bookId, 2),

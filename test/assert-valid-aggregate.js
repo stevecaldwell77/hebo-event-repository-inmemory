@@ -8,26 +8,28 @@ test('writeEvent() - aggregate must be defined in constructor', async t => {
     });
 
     // Bit of a cheat, an event that works for both aggregates
-    const event = {
+    const makeEvent = aggregateName => ({
+        aggregateName,
+        aggregateId: shortid.generate(),
         eventId: shortid.generate(),
         type: 'NAME_SET',
         metadata: { userId: 1234 },
         payload: { name: 'Johnson' },
         sequenceNumber: 1,
-    };
+    });
 
     await t.notThrows(
-        repo.writeEvent('book', shortid.generate(), event),
+        repo.writeEvent(makeEvent('book')),
         'able to call writeEvent to first aggregate',
     );
 
     await t.notThrows(
-        repo.writeEvent('author', shortid.generate(), event),
+        repo.writeEvent(makeEvent('author')),
         'able to call writeEvent to second aggregate',
     );
 
     await t.throws(
-        repo.writeEvent('publisher', shortid.generate(), event),
+        repo.writeEvent(makeEvent('publisher')),
         /unknown aggregate "publisher"/,
         'error thrown when writeEvent called with unknown aggregate',
     );

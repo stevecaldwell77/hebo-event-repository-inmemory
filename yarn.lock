@@ -2966,24 +2966,13 @@ has@^1.0.1:
   dependencies:
     function-bind "^1.1.1"
 
-hebo-validation@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/hebo-validation/-/hebo-validation-2.0.0.tgz#7e24f23e79789e919604cbc82862f9dad63182d9"
-  integrity sha512-UCiEUVYz8Ru5LLov74wOYe3ayPd+VE7DYMB9OWQGqD5WfqXn3zZIov5JY3RsPHjOgLCBqnASi/KmOYrg8Sh+NA==
+hebo-validation@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/hebo-validation/-/hebo-validation-3.0.0.tgz#1ad6c89e1c1c4c7a8f4d8d05ebdd44eac8d95ff0"
+  integrity sha512-pqet3Oiw0cmZpfMU2LcyLVNSkXBoTrGqbTFrbtIRtL42Kzh+9bVxj1ORm3ENIOEsZqBnC7U24yrIPp3c4zzIUg==
   dependencies:
     joi "^13.7.0"
     lodash "^4.17.11"
-
-hebo@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/hebo/-/hebo-1.0.0.tgz#af99e82370626b7f3588915c4a1a367517d9d26e"
-  integrity sha512-ADqSVUxXt8htGJK06aHAkkxC1T8uXFZm++D5Bcf9XcbhZe8nCUyJffiOiOAR5exAyDc1fnddHh3mmaK/IzgyuQ==
-  dependencies:
-    hebo-validation "^2.0.0"
-    immer "^1.7.2"
-    joi "^13.6.0"
-    lodash "^4.17.11"
-    shortid "^2.2.13"
 
 hoek@5.x.x:
   version "5.0.4"
@@ -3076,11 +3065,6 @@ ignore@^4.0.2, ignore@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
-
-immer@^1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-1.7.2.tgz#a51e9723c50b27e132f6566facbec1c85fc69547"
-  integrity sha512-4Urocwu9+XLDJw4Tc6ZCg7APVjjLInCFvO4TwGsAYV5zT6YYSor14dsZR0+0tHlDIN92cFUOq+i7fC00G5vTxA==
 
 import-lazy@^2.1.0:
   version "2.1.0"
@@ -3691,7 +3675,7 @@ jest-validate@^23.5.0:
     leven "^2.1.0"
     pretty-format "^23.6.0"
 
-joi@^13.6.0, joi@^13.7.0:
+joi@^13.7.0:
   version "13.7.0"
   resolved "https://registry.yarnpkg.com/joi/-/joi-13.7.0.tgz#cfd85ebfe67e8a1900432400b4d03bbd93fb879f"
   integrity sha512-xuY5VkHfeOYK3Hdi91ulocfuFopwgbSORmIwzcwHKESQhC7w1kD5jaVSPnqDxS2I8t3RZ9omCKAxNwXN5zG1/Q==

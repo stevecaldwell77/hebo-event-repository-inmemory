@@ -7,6 +7,8 @@ test('forceWriteEvent() - invalid event can be stored', async t => {
     const bookId = shortid.generate();
 
     const event = {
+        aggregateName: 'book',
+        aggregateId: bookId,
         eventId: shortid.generate(),
         metadata: {},
         payload: {},
@@ -14,7 +16,7 @@ test('forceWriteEvent() - invalid event can be stored', async t => {
     };
 
     // event missing type
-    const result = await repo.forceWriteEvent('book', bookId, event);
+    const result = await repo.forceWriteEvent(event);
     t.true(result, 'forceWriteEvent() returns true');
 
     t.deepEqual(

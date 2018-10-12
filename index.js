@@ -48,7 +48,8 @@ class EventRepositoryInmemory {
         );
     }
 
-    async appendEvent(aggregateName, aggregateId, event) {
+    async appendEvent(event) {
+        const { aggregateName, aggregateId } = event;
         const prevEvents = await this.getEvents(aggregateName, aggregateId);
         const appendOk = eventCanBeAppended(prevEvents, event);
         if (!appendOk) return false;
@@ -57,15 +58,15 @@ class EventRepositoryInmemory {
     }
 
     // eslint-disable-next-line require-await
-    async writeEvent(aggregateName, aggregateId, event) {
-        this.assertValidAggregate('writeEvent', aggregateName);
+    async writeEvent(event) {
+        this.assertValidAggregate('writeEvent', event.aggregateName);
         validateEvent(event);
-        return this.appendEvent(aggregateName, aggregateId, event);
+        return this.appendEvent(event);
     }
 
     // eslint-disable-next-line require-await
-    async forceWriteEvent(aggregateName, aggregateId, event) {
-        return this.appendEvent(aggregateName, aggregateId, event);
+    async forceWriteEvent(event) {
+        return this.appendEvent(event);
     }
 }
 
