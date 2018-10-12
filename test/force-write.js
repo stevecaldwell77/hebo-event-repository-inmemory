@@ -1,5 +1,6 @@
 const test = require('ava');
 const shortid = require('shortid');
+const uuid = require('uuid/v4');
 const EventRepositoryInmemory = require('..');
 
 test('forceWriteEvent() - invalid event can be stored', async t => {
@@ -9,7 +10,7 @@ test('forceWriteEvent() - invalid event can be stored', async t => {
     const event = {
         aggregateName: 'book',
         aggregateId: bookId,
-        eventId: shortid.generate(),
+        eventId: uuid(),
         metadata: {},
         payload: {},
         sequenceNumber: 1,

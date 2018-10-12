@@ -1,5 +1,6 @@
 const test = require('ava');
 const shortid = require('shortid');
+const uuid = require('uuid/v4');
 const EventRepositoryInmemory = require('..');
 
 test('writeEvent() - aggregate must be defined in constructor', async t => {
@@ -11,7 +12,7 @@ test('writeEvent() - aggregate must be defined in constructor', async t => {
     const makeEvent = aggregateName => ({
         aggregateName,
         aggregateId: shortid.generate(),
-        eventId: shortid.generate(),
+        eventId: uuid(),
         type: 'NAME_SET',
         metadata: { userId: 1234 },
         payload: { name: 'Johnson' },
