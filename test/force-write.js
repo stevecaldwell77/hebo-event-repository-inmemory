@@ -5,6 +5,7 @@ const EventRepositoryInmemory = require('..');
 
 test('forceWriteEvent() - invalid event can be stored', async t => {
     const repo = new EventRepositoryInmemory({ aggregates: ['book'] });
+    const { getEvents } = repo;
     const bookId = shortid.generate();
 
     const event = {
@@ -21,7 +22,7 @@ test('forceWriteEvent() - invalid event can be stored', async t => {
     t.true(result, 'forceWriteEvent() returns true');
 
     t.deepEqual(
-        await repo.getEvents('book', bookId),
+        await getEvents('book', bookId),
         [event],
         'invalid event is stored',
     );
