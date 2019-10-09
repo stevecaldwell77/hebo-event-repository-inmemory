@@ -1,7 +1,7 @@
 {
   "name": "hebo-event-repository-inmemory",
   "description": "Event Repository implementation for hebo-js that stores everything in memory",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "author": "Steve Caldwell <scaldwell@gmail.com>",
   "ava": {
     "failFast": true,
