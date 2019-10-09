@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "auto-bind": "^1.2.1",
-    "hebo-validation": "^3.0.0",
+    "hebo-validation": "^4.1.0",
     "lodash": "^4.17.11"
   },
   "devDependencies": {

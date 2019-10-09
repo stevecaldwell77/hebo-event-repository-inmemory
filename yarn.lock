@@ -2969,10 +2969,10 @@ has@^1.0.1, has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-hebo-validation@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/hebo-validation/-/hebo-validation-3.0.0.tgz#1ad6c89e1c1c4c7a8f4d8d05ebdd44eac8d95ff0"
-  integrity sha512-pqet3Oiw0cmZpfMU2LcyLVNSkXBoTrGqbTFrbtIRtL42Kzh+9bVxj1ORm3ENIOEsZqBnC7U24yrIPp3c4zzIUg==
+hebo-validation@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/hebo-validation/-/hebo-validation-4.1.0.tgz#ef0a230071d3145dee654ec5a5fdf1b9fa4fd1cd"
+  integrity sha512-83ZOYqK63ddo/AhY6hsBlfBk5ndRPMqDsPIDQU3a6mw/Sj1P4dRF9flZgQ2kYEMcaFTEWXiULc5KIw3oznj0mg==
   dependencies:
     joi "^13.7.0"
     lodash "^4.17.11"
