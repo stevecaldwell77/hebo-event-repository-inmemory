@@ -3,22 +3,22 @@ const shortid = require('shortid');
 const uuid = require('uuid/v4');
 const EventRepositoryInmemory = require('..');
 
+// Bit of a cheat, an event that works for both book and author aggregates
+const makeEvent = aggregateName => ({
+    aggregateName,
+    aggregateId: shortid.generate(),
+    eventId: uuid(),
+    type: 'NAME_SET',
+    metadata: { userId: 1234 },
+    payload: { name: 'Johnson' },
+    sequenceNumber: 1,
+});
+
 test('writeEvent() - aggregate must be defined in constructor', async t => {
     const repo = new EventRepositoryInmemory({
         aggregates: ['book', 'author'],
     });
     const { writeEvent } = repo;
-
-    // Bit of a cheat, an event that works for both aggregates
-    const makeEvent = aggregateName => ({
-        aggregateName,
-        aggregateId: shortid.generate(),
-        eventId: uuid(),
-        type: 'NAME_SET',
-        metadata: { userId: 1234 },
-        payload: { name: 'Johnson' },
-        sequenceNumber: 1,
-    });
 
     await t.notThrows(
         writeEvent(makeEvent('book')),

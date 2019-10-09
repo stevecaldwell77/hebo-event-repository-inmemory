@@ -39,7 +39,6 @@ class EventRepositoryInmemory {
         );
     }
 
-    // eslint-disable-next-line require-await
     async getEvents(aggregateName, aggregateId, greaterThanSequenceNumber = 0) {
         this.assertValidAggregate('getEvents', aggregateName);
         const allEvents = this.aggregates[aggregateName][aggregateId] || [];
@@ -57,14 +56,12 @@ class EventRepositoryInmemory {
         return true;
     }
 
-    // eslint-disable-next-line require-await
     async writeEvent(event) {
         this.assertValidAggregate('writeEvent', event.aggregateName);
         validateEvent(event);
         return this.appendEvent(event);
     }
 
-    // eslint-disable-next-line require-await
     async forceWriteEvent(event) {
         return this.appendEvent(event);
     }
