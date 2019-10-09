@@ -20,17 +20,17 @@ test('writeEvent() - aggregate must be defined in constructor', async t => {
     });
     const { writeEvent } = repo;
 
-    await t.notThrows(
+    await t.notThrowsAsync(
         writeEvent(makeEvent('book')),
         'able to call writeEvent to first aggregate',
     );
 
-    await t.notThrows(
+    await t.notThrowsAsync(
         writeEvent(makeEvent('author')),
         'able to call writeEvent to second aggregate',
     );
 
-    await t.throws(
+    await t.throwsAsync(
         writeEvent(makeEvent('publisher')),
         /unknown aggregate "publisher"/,
         'error thrown when writeEvent called with unknown aggregate',
@@ -43,17 +43,17 @@ test('getEvents() - aggregate must be defined in constructor', async t => {
     });
     const { getEvents } = repo;
 
-    await t.notThrows(
+    await t.notThrowsAsync(
         getEvents('book', shortid.generate()),
         'able to call getEvents to first aggregate',
     );
 
-    await t.notThrows(
+    await t.notThrowsAsync(
         getEvents('author', shortid.generate()),
         'able to call getEvents to second aggregate',
     );
 
-    await t.throws(
+    await t.throwsAsync(
         getEvents('publisher', shortid.generate()),
         /unknown aggregate "publisher"/,
         'error thrown when getEvents called with unknown aggregate',
